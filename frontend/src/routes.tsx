@@ -4,8 +4,8 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { useAuthStore } from "./store/auth.store";
 import { AppLayout } from './components/Layout';
+import { LoginPage } from './pages/LoginPage';
 
-const LoginPage = () => <div>Tela de Login</div>;
 const CadastroPage = () => <div>Tela de Cadastro</div>;
 
 const DashboardPage = () => <div>Tela de Dashboard</div>;
