@@ -3,10 +3,9 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { useAuthStore } from "./store/auth.store";
-import { AppLayout } from './components/Layout';
-
-const LoginPage = () => <div>Tela de Login</div>;
-const CadastroPage = () => <div>Tela de Cadastro</div>;
+import { AppLayout } from "./components/Layout";
+import { LoginPage } from "./pages/LoginPage";
+import { RegisterPage } from "./pages/RegisterPage";
 
 const DashboardPage = () => <div>Tela de Dashboard</div>;
 const RecomendacoesPage = () => <div>Tela de Recomendações</div>;
@@ -18,7 +17,8 @@ const ListasPage = () => <div>Tela de Listas</div>;
 const MinhaListaPage = () => <div>Tela Minha Lista</div>;
 
 const RootRedirect = () => {
-  const { token } = useAuthStore.getState();
+  const { token } = useAuthStore();
+
   if (token) {
     return <Navigate to="/app/dashboard" replace />;
   }
@@ -32,7 +32,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "/cadastro",
-    element: <CadastroPage />,
+    element: <RegisterPage />,
   },
 
   {
@@ -79,7 +79,6 @@ export const router = createBrowserRouter([
             index: true,
             element: <Navigate to="/app/dashboard" replace />,
           },
-
         ],
       },
     ],
