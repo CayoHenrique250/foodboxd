@@ -1,91 +1,99 @@
-import React, { useState} from "react";
+import { useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import styles from "./LoginPage.module.css";
-import { useAuthStore } from "../store/auth.store";
+import styles from "./RegisterPage.module.css";
 
 interface FormInputs {
+  first_name: string;
+  last_name: string;
   email: string;
   password: string;
+  password2: string;
 }
 
-export const LoginPage = () => {
+export const RegisterPage = () => {
   const navigate = useNavigate();
-  const login = useAuthStore((state) => state.login);
   const [apiError, setApiError] = useState<string | null>(null);
-
-  const { token } = useAuthStore();
-
-  React.useEffect(() => {
-    if (token) {
-      navigate("/app/dashboard", { replace: true });
-    }
-  }, [token, navigate]);
 
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm<FormInputs>();
+
+  // eslint-disable-next-line react-hooks/incompatible-library
+  const passwordValue = watch("password");
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
     setApiError(null);
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/login/", {
+      const response = await fetch("http://127.0.0.1:8000/api/register/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          username: data.email,
-          password: data.password,
-        }),
+
+        body: JSON.stringify(data),
       });
 
       if (!response.ok) {
         const errorData = await response.json();
+        const firstErrorKey = Object.keys(errorData)[0];
+        const firstErrorMessage = errorData[firstErrorKey][0];
 
-        setApiError(errorData.detail || "E-mail ou senha inválidos.");
+        setApiError(
+          firstErrorMessage || "Falha ao cadastrar. Verifique os dados."
+        );
         return;
       }
 
-      const { access } = await response.json();
-
-      const userResponse = await fetch("http://127.0.0.1:8000/api/users/me/", {
-        headers: {
-          Authorization: `Bearer ${access}`,
-        },
-      });
-
-      if (!userResponse.ok) {
-        throw new Error("Falha ao buscar dados do usuário após o login.");
-      }
-
-      const userData = await userResponse.json();
-
-      login(access, userData);
-
-      navigate("/app/dashboard");
+      navigate("/login");
     } catch (error) {
       console.error("Falha na requisição:", error);
       setApiError("Não foi possível conectar ao servidor. Tente novamente.");
     }
   };
 
-  if (token) {
-    return <div>Redirecionando...</div>;
-  }
-
   return (
     <div className={styles.container}>
       <div className={styles.card}>
         <h1 className={styles.logo}>FoodBoxd</h1>
-        <h2 className={styles.subtitle}>Entre na sua conta</h2>
+        <h2 className={styles.subtitle}>Crie sua conta</h2>
 
         {apiError && <div className={styles.apiError}>{apiError}</div>}
 
         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+          <div className={styles.inputGroup}>
+            <label htmlFor="first_name" className={styles.label}>
+              Nome
+            </label>
+            <input
+              id="first_name"
+              type="text"
+              className={styles.input}
+              {...register("first_name", {
+                required: "Nome é obrigatório",
+              })}
+            />
+            {errors.first_name && (
+              <span className={styles.error}>{errors.first_name.message}</span>
+            )}
+          </div>
+
+          <div className={styles.inputGroup}>
+            <label htmlFor="last_name" className={styles.label}>
+              Sobrenome (Opcional)
+            </label>
+            <input
+              id="last_name"
+              type="text"
+              className={styles.input}
+              {...register("last_name")}
+            />
+          </div>
+
           <div className={styles.inputGroup}>
             <label htmlFor="email" className={styles.label}>
               E-mail
@@ -118,8 +126,8 @@ export const LoginPage = () => {
               {...register("password", {
                 required: "Senha é obrigatória",
                 minLength: {
-                  value: 6,
-                  message: "A senha deve ter pelo menos 6 caracteres",
+                  value: 8,
+                  message: "A senha deve ter pelo menos 8 caracteres",
                 },
               })}
             />
@@ -128,18 +136,37 @@ export const LoginPage = () => {
             )}
           </div>
 
+          <div className={styles.inputGroup}>
+            <label htmlFor="password2" className={styles.label}>
+              Confirme sua Senha
+            </label>
+            <input
+              id="password2"
+              type="password"
+              className={styles.input}
+              {...register("password2", {
+                required: "Confirmação de senha é obrigatória",
+                validate: (value) =>
+                  value === passwordValue || "As senhas não coincidem",
+              })}
+            />
+            {errors.password2 && (
+              <span className={styles.error}>{errors.password2.message}</span>
+            )}
+          </div>
+
           <button
             type="submit"
             className={styles.button}
             disabled={isSubmitting}
           >
-            {isSubmitting ? "Entrando..." : "Entrar"}
+            {isSubmitting ? "Criando conta..." : "Cadastrar"}
           </button>
         </form>
 
         <div className={styles.footerLink}>
-          <Link to="/cadastro" className={styles.link}>
-            Não tem uma conta? Cadastre-se
+          <Link to="/login" className={styles.link}>
+            Já tem uma conta? Faça login
           </Link>
         </div>
       </div>
