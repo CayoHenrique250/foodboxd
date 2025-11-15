@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; 
 import styles from './LoginPage.module.css';
+import { useAuthStore } from '../store/auth.store';
 
 interface FormInputs {
   email: string;
@@ -8,15 +10,63 @@ interface FormInputs {
 }
 
 export const LoginPage = () => {
+ 
+  const navigate = useNavigate();
+  const login = useAuthStore((state) => state.login); 
+  const [apiError, setApiError] = useState<string | null>(null); 
+
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<FormInputs>();
 
+
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log('Dados do formulário:', data);
+    setApiError(null); // Limpa erros anteriores
+
+    try {
+
+      const response = await fetch('http://127.0.0.1:8000/api/login/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data), 
+      });
+
+
+      if (!response.ok) {
+        const errorData = await response.json();
+       
+        setApiError(errorData.detail || 'E-mail ou senha inválidos.');
+        return; 
+      }
+
+      const { access } = await response.json(); 
+      
+
+      const userResponse = await fetch('http://127.0.0.1:8000/api/users/me/', {
+        headers: {
+          'Authorization': `Bearer ${access}`, 
+        }
+      });
+      
+      if (!userResponse.ok) {
+         throw new Error('Falha ao buscar dados do usuário após o login.');
+      }
+      
+      const userData = await userResponse.json();
+      
+      login(access, userData); 
+
+      navigate('/app/dashboard');
+
+    } catch (error) {
+ 
+      console.error('Falha na requisição:', error);
+      setApiError('Não foi possível conectar ao servidor. Tente novamente.');
+    }
   };
 
   return (
@@ -24,8 +74,15 @@ export const LoginPage = () => {
       <div className={styles.card}>
         <h1 className={styles.logo}>FoodBoxd</h1>
         <h2 className={styles.subtitle}>Entre na sua conta</h2>
+        
+        {apiError && (
+          <div className={styles.apiError}>
+            {apiError}
+          </div>
+        )}
 
         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+     
           <div className={styles.inputGroup}>
             <label htmlFor="email" className={styles.label}>
               E-mail

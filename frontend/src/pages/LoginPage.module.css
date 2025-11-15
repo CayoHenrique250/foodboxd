@@ -61,9 +61,20 @@
 }
 
 .error {
-  color: #d32f2f; /* Vermelho */
+  color: #d32f2f; 
   font-size: 12px;
   margin-top: 4px;
+}
+
+.apiError {
+  padding: 12px;
+  font-size: 14px;
+  color: #d32f2f;
+  background-color: #ffcdd2;
+  border: 1px solid #d32f2f;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  text-align: center;
 }
 
 .button {
@@ -80,7 +91,7 @@
 }
 
 .button:disabled {
-  background-color: #f48fb1; 
+  background-color: #f48fb1;
   cursor: not-allowed;
 }
 
