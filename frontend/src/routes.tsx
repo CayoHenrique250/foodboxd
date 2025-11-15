@@ -1,6 +1,8 @@
 /* eslint-disable react-refresh/only-export-components */
 
-import { createBrowserRouter, Outlet } from 'react-router-dom';
+import { createBrowserRouter, Outlet, Navigate } from "react-router-dom";
+import { ProtectedRoute } from "./components/ProtectedRoute";
+import { useAuthStore } from "./store/auth.store";
 
 const AppLayout = () => (
   <div>
@@ -22,58 +24,71 @@ const DiarioPage = () => <div>Tela de Diário</div>;
 const ListasPage = () => <div>Tela de Listas</div>;
 const MinhaListaPage = () => <div>Tela Minha Lista</div>;
 
-export const router = createBrowserRouter([
+const RootRedirect = () => {
+  const { token } = useAuthStore.getState();
+  if (token) {
+    return <Navigate to="/app/dashboard" replace />;
+  }
+  return <Navigate to="/login" replace />;
+};
 
+export const router = createBrowserRouter([
   {
-    path: '/login',
+    path: "/login",
     element: <LoginPage />,
   },
   {
-    path: '/cadastro',
+    path: "/cadastro",
     element: <CadastroPage />,
   },
 
   {
-    path: '/app',
-    element: <AppLayout />, 
+    element: <ProtectedRoute />,
     children: [
       {
-        path: 'dashboard', 
-        element: <DashboardPage />,
-      },
-      {
-        path: 'recomendacoes', 
-        element: <RecomendacoesPage />,
-      },
-      {
-        path: 'pesquisa', 
-        element: <PesquisaPage />,
-      },
-      {
-        path: 'amigos',
-        element: <AmigosPage />,
-      },
-      {
-        path: 'perfil',
-        element: <PerfilPage />,
-      },
-      {
-        path: 'diario',
-        element: <DiarioPage />,
-      },
-      {
-        path: 'listas', 
-        element: <ListasPage />,
-      },
-      {
-        path: 'minha-lista', 
-        element: <MinhaListaPage />,
+        path: "/app",
+        element: <AppLayout />,
+        children: [
+          {
+            path: "dashboard",
+            element: <DashboardPage />,
+          },
+          {
+            path: "recomendacoes",
+            element: <RecomendacoesPage />,
+          },
+
+          {
+            path: "pesquisa",
+            element: <PesquisaPage />,
+          },
+          {
+            path: "amigos",
+            element: <AmigosPage />,
+          },
+          {
+            path: "perfil",
+            element: <PerfilPage />,
+          },
+          {
+            path: "diario",
+            element: <DiarioPage />,
+          },
+          {
+            path: "listas",
+            element: <ListasPage />,
+          },
+          {
+            path: "minha-lista",
+            element: <MinhaListaPage />,
+          },
+        ],
       },
     ],
   },
-  
+
   {
-    path: '/',
-    element: <div>Carregando...</div>,
+    path: "/",
+    element: <RootRedirect />,
   },
 ]);
