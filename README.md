@@ -224,6 +224,10 @@ This is an academic project developed for the HCI (Human-Computer Interaction) c
 
 Project developed as part of the HCI course.
 
+- [🧑‍💻Cayo Henrique](https://github.com/CayoHenrique250)
+- [👩‍💻Anna Clara](https://github.com/aclaralins)
+- [🧑‍💻Mauro Santos](https://github.com/MauroSantosIf)
+
 ---
 
 ⭐ If you liked this project, consider giving it a star!
