@@ -1,16 +1,9 @@
 /* eslint-disable react-refresh/only-export-components */
 
-import { createBrowserRouter, Outlet, Navigate } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { useAuthStore } from "./store/auth.store";
-
-const AppLayout = () => (
-  <div>
-    <h2>FoodBoxd (Menu Principal)</h2>
-    <hr />
-    <Outlet />
-  </div>
-);
+import { AppLayout } from './components/Layout';
 
 const LoginPage = () => <div>Tela de Login</div>;
 const CadastroPage = () => <div>Tela de Cadastro</div>;
@@ -82,6 +75,11 @@ export const router = createBrowserRouter([
             path: "minha-lista",
             element: <MinhaListaPage />,
           },
+          {
+            index: true,
+            element: <Navigate to="/app/dashboard" replace />,
+          },
+
         ],
       },
     ],
