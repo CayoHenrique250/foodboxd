@@ -6,12 +6,12 @@ import { useAuthStore } from "./store/auth.store";
 import { AppLayout } from "./components/Layout";
 import { LoginPage } from "./pages/LoginPage";
 import { RegisterPage } from "./pages/RegisterPage";
+import { ProfilePage } from './pages/ProfilePage';
 
 const DashboardPage = () => <div>Tela de Dashboard</div>;
 const RecomendacoesPage = () => <div>Tela de Recomendações</div>;
 const PesquisaPage = () => <div>Tela de Pesquisa</div>;
 const AmigosPage = () => <div>Tela de Amigos</div>;
-const PerfilPage = () => <div>Tela de Perfil</div>;
 const DiarioPage = () => <div>Tela de Diário</div>;
 const ListasPage = () => <div>Tela de Listas</div>;
 const MinhaListaPage = () => <div>Tela Minha Lista</div>;
@@ -61,7 +61,7 @@ export const router = createBrowserRouter([
           },
           {
             path: "perfil",
-            element: <PerfilPage />,
+            element: <ProfilePage />,
           },
           {
             path: "diario",
