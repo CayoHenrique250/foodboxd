@@ -1,5 +1,7 @@
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from rest_framework import serializers
+
+User = get_user_model()
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -15,13 +17,13 @@ class RegisterSerializer(serializers.ModelSerializer):
     password2 = serializers.CharField(
         write_only=True, required=True, label="Confirm Password")
     first_name = serializers.CharField(required=True)
+    last_name = serializers.CharField(required=False, allow_blank=True)
 
     class Meta:
         model = User
         fields = ['email', 'password', 'password2', 'first_name', 'last_name']
 
     def validate(self, attrs):
-
         if attrs['password'] != attrs['password2']:
             raise serializers.ValidationError(
                 {"password": "As senhas não coincidem."})
@@ -33,7 +35,9 @@ class RegisterSerializer(serializers.ModelSerializer):
         return attrs
 
     def create(self, validated_data):
-
+        # Remove password2 before creating user
+        validated_data.pop('password2', None)
+        
         user = User.objects.create(
             username=validated_data['email'],
             email=validated_data['email'],
