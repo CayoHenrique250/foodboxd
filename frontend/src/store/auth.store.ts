@@ -1,10 +1,13 @@
-import { create } from "zustand";
-import { createJSONStorage, persist } from "zustand/middleware";
+import { create } from 'zustand';
+import { createJSONStorage, persist } from 'zustand/middleware';
 
 interface User {
   id: string;
   email: string;
   name: string;
+  last_name: string;
+  username: string;
+  foto?: string; 
 }
 
 interface AuthState {
@@ -12,6 +15,7 @@ interface AuthState {
   user: User | null;
   login: (token: string, user: User) => void;
   logout: () => void;
+  updateUserPhoto: (newPhotoUrl: string) => void;
 }
 
 export const useAuthStore = create<AuthState>()(
@@ -33,10 +37,19 @@ export const useAuthStore = create<AuthState>()(
           user: null,
         });
       },
+
+      updateUserPhoto: (newPhotoUrl) => {
+        set((state) => ({
+     
+          user: state.user
+            ? { ...state.user, foto: newPhotoUrl }
+            : null,
+        }));
+      },
     }),
     {
-      name: "foodboxd-auth-storage",
+      name: 'foodboxd-auth-storage',
       storage: createJSONStorage(() => localStorage),
-    }
-  )
+    },
+  ),
 );

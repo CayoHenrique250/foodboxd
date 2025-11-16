@@ -1,0 +1,176 @@
+.container {
+  width: 100%;
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 80px;
+}
+
+.header {
+  position: relative;
+  margin-bottom: 64px;
+}
+
+.headerCover {
+  height: 8rem;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  background-image: linear-gradient(135deg, #e91e63 0%, #c2185b 100%);
+}
+
+.headerContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.photoWrapper {
+  position: relative;
+  margin-top: -50px;
+}
+
+.profilePicture {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #ffffff;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+.uploadLabel {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: #ffffff;
+  padding: 6px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.uploadLabel:hover {
+  background-color: #f5f5f5;
+  transform: scale(1.1);
+}
+
+.inputHidden {
+  display: none;
+}
+
+.userName {
+  font-size: 1.875rem;
+  font-weight: 700;
+  margin-top: 0.5rem;
+  color: #1f2937;
+}
+
+.userHandle {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.statBox {
+  text-align: center;
+  padding: 1rem;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.statNumber {
+  display: block;
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: #c2185b;
+}
+
+.statLabel {
+  font-size: 0.875rem;
+  color: #4b5563;
+}
+
+.listCard {
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-bottom: 2rem;
+}
+
+.listTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #1f2937;
+}
+
+.listItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.listItem:hover {
+  background-color: #f9fafb;
+}
+
+.listItemIcon {
+  color: #9ca3af;
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+}
+
+.listItemContent {
+  flex-grow: 1;
+}
+
+.listItemTitle {
+  font-weight: 600;
+  color: #111827;
+}
+
+.listItemSubtitle {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.logoutButtonSection {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-top: 2rem;
+}
+
+.logoutButton {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.375rem;
+  text-align: center;
+  font-weight: 500;
+  border: 1px solid #dc2626;
+  color: #dc2626;
+  background-color: #ffffff;
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+
+.logoutButton:hover {
+  background-color: #fef2f2;
+}
