@@ -7,6 +7,7 @@ import { AppLayout } from "./components/Layout";
 import { LoginPage } from "./pages/LoginPage";
 import { RegisterPage } from "./pages/RegisterPage";
 import { ProfilePage } from './pages/ProfilePage';
+import SearchPage from "./pages/SearchPage";
 
 const DashboardPage = () => <div>Tela de Dashboard</div>;
 const RecomendacoesPage = () => <div>Tela de Recomendações</div>;
@@ -53,7 +54,7 @@ export const router = createBrowserRouter([
 
           {
             path: "pesquisa",
-            element: <PesquisaPage />,
+            element: <SearchPage />,
           },
           {
             path: "amigos",
