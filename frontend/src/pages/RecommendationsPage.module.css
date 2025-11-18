@@ -1,0 +1,125 @@
+/* RecommendationsPage.module.css */
+
+.pageContainer {
+  background-color: transparent; 
+  color: #ffffff;
+  width: 100%;
+  min-height: 100%;
+  padding: 1rem 2rem;
+  padding-bottom: 100px; /* Espaço para menu flutuante não cobrir */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* --- HEADER DO LOGO --- */
+.headerLogo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+/* SUA CONFIGURAÇÃO DE IMAGEM AQUI */
+.logoImage {
+  width: clamp(150px, 40vw, 280px); /* Tamanho dinâmico: mín 150px, ideal 40% da tela, máx 280px */
+  height: auto; 
+  object-fit: contain; 
+  margin: 0;
+  display: block;
+}
+
+/* --- GRID --- */
+.gridContainer {
+  display: grid;
+  width: 100%;
+  max-width: 1200px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  aspect-ratio: 16/9;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.cardOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #a03615; /* Laranja */
+  padding: 12px 15px;
+}
+
+.cardTitle {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* --- MENU FLUTUANTE --- */
+.floatingMenu {
+  position: fixed;
+  bottom: 90px; /* Acima da navbar principal */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #8c2f12; /* Marrom escuro */
+  padding: 8px 10px;
+  border-radius: 50px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  z-index: 50;
+}
+
+.menuItem {
+  padding: 8px 20px;
+  border-radius: 30px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.activeItem {
+  background-color: rgba(0,0,0,0.2);
+  color: white;
+  font-weight: bold;
+}
+
+/* --- MOBILE --- */
+@media (max-width: 768px) {
+  .pageContainer {
+    padding: 1rem;
+    padding-bottom: 140px;
+  }
+  
+  .gridContainer {
+    grid-template-columns: 1fr;
+  }
+  
+  .floatingMenu {
+    bottom: 80px; 
+  }
+}

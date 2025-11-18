@@ -1,13 +1,12 @@
 import React from 'react';
 import styles from './SearchPage.module.css';
-import logoImg from '../assets/logo.png';
+import logoImg from '../../public/logo-backBlack-horizontal.png';
 
 import { FiSearch, FiArrowRightCircle } from 'react-icons/fi'; 
 
 
 const SearchPage: React.FC = () => {
   
-  // Lista de opções conforme a imagem
   const searchOptions = [
     "Últimas Datas",
     "Tipo, País ou Região",
@@ -24,13 +23,11 @@ const SearchPage: React.FC = () => {
       
       {/* 2. AQUI ESTÁ A TROCA DO TEXTO PELA IMAGEM */}
       <header className={styles.headerLogo}>
-        <span className={styles.logoText}>Food</span>
         <img 
           src={logoImg} 
           alt="Logo" 
           className={styles.logoImage} 
         />
-        <span className={styles.logoText}>Boxd</span>
       </header>
 
       {/* Barra de Pesquisa */}

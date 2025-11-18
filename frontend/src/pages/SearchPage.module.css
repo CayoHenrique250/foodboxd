@@ -1,8 +1,8 @@
-/* IMPORTANDO A FONTE GÓTICA */
+/* IMPORTANDO A FONTE GÓTICA - Pode remover se não for usar em outro lugar */
 @import url('https://fonts.googleapis.com/css2?family=Pirata+One&display=swap');
 
 .pageContainer {
-  background-color: #0f131a;
+  background-color: transparent;
   color: #ffffff;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   display: flex;
@@ -10,41 +10,29 @@
   align-items: center;
   
   width: 100%;
-  
   min-height: 100%; 
-
   box-sizing: border-box; 
-  
   padding: 1rem 2rem;
 }
+
 .headerLogo {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  
   gap: 0px;
-  
   margin-top: 10px;
   margin-bottom: 25px; 
 }
 
-.logoText {
-  font-family: 'Pirata One', cursive; 
-  font-size: 2.8rem; 
-  font-weight: 400;
-  color: #ffffff;
-  letter-spacing: 1px;
-  line-height: 1; 
-  margin: 0 -5px;
-}
-
 .logoImage {
-  width: 60px; 
-  height: auto;
-  object-fit: contain;
+  
+  width: clamp(150px, 40vw, 280px);
+  
+  height: auto; 
+  object-fit: contain; 
   margin: 0;
-  transform: translateY(4px); 
+ 
 }
 
 .searchContainer {
@@ -126,13 +114,4 @@
     gap: 0px; 
   }
 
-  .logoText {
-    font-size: 2rem;
-    margin: 0 -3px; 
-  }
-
-  .logoImage {
-    width: 45px; 
-    transform: translateY(2px);
-  }
 }
