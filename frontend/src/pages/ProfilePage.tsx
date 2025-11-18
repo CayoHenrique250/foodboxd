@@ -2,46 +2,68 @@ import React from "react";
 import { useAuthStore } from "../store/auth.store";
 import styles from "./ProfilePage.module.css";
 
-const mockPratosFavoritos = [
-  { id: 1, nome: "Carbonara Perfeito", restaurante: "Bella Italia" },
-  { id: 2, nome: "Burger Clássico", restaurante: "Top Burger" },
-  { id: 3, nome: "Sushi de Salmão", restaurante: "Sushi D'or" },
+const mockFavoritos = [
+  { id: 1, nome: "Carbonara", imagem: "/image-temp.png" },
+  { id: 2, nome: "Burger", imagem: "/image-temp.png" },
+  { id: 3, nome: "Sushi", imagem: "/image-temp.png" },
+  { id: 4, nome: "Pizza", imagem: "/image-temp.png" },
 ];
 
-const mockStats = {
-  avaliacoes: 24,
-  listas: 5,
-  seguindo: 12,
-};
+const mockAtividadeRecente = [
+  { id: 1, nome: "Ramen", imagem: "/image-temp.png" },
+  { id: 2, nome: "Tacos", imagem: "/image-temp.png" },
+  { id: 3, nome: "Pasta", imagem: "/image-temp.png" },
+  { id: 4, nome: "Salad", imagem: "/image-temp.png" },
+];
 
-const IconPlate = () => (
-  <svg
-    className={styles.listItemIcon}
-    fill="none"
-    viewBox="0 0 24 24"
-    strokeWidth={1.5}
-    stroke="currentColor"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
-    />
-  </svg>
-);
-
-const IconEdit = () => (
+const IconCamera = () => (
   <svg
     style={{ width: "20px", height: "20px" }}
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth={1.5}
+    strokeWidth={2}
     stroke="currentColor"
   >
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
-      d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 19.82a2.25 2.25 0 01-1.06.61l-2.752.825a.75.75 0 01-.976-.976l.825-2.752a2.25 2.25 0 01.61-1.06l11.25-11.25zM16.862 4.487L19.5 7.125m-8.25 8.25L5.25 19.5"
+      d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z"
+    />
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z"
+    />
+  </svg>
+);
+
+const IconChevronRight = () => (
+  <svg
+    style={{ width: "20px", height: "20px" }}
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth={2}
+    stroke="currentColor"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M8.25 4.5l7.5 7.5-7.5 7.5"
+    />
+  </svg>
+);
+
+const IconSettings = () => (
+  <svg fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z"
+    />
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
     />
   </svg>
 );
@@ -52,7 +74,7 @@ export const ProfilePage = () => {
   const updateUserPhoto = useAuthStore((state) => state.updateUserPhoto);
 
   if (!user) {
-    return <div>Carregando perfil...</div>;
+    return <div className={styles.loading}>Carregando perfil...</div>;
   }
 
   const handleLogout = () => {
@@ -72,7 +94,6 @@ export const ProfilePage = () => {
       const newPhotoUrl = e.target?.result as string;
 
       if (newPhotoUrl) {
-        console.log("Imagem convertida para Base64 e guardada no store.");
         updateUserPhoto(newPhotoUrl);
       }
     };
@@ -83,14 +104,40 @@ export const ProfilePage = () => {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <div className={styles.headerCover}></div>
+        <div className={styles.topBar}>
+          <a href="/app/configuracoes" className={styles.settingsIcon}>
+            <IconSettings />
+          </a>
+          <div className={styles.logoContainer}>
+            <img
+              src="/logo-backBlack-horizontal.png"
+              alt="FoodBoxd"
+              className={styles.logo}
+            />
+          </div>
+        </div>
 
-        <div className={styles.headerContent}>
+        <div className={styles.mobileFloatingButtons}>
+          <a href="/app/perfil" className={styles.mobileFloatingButton}>
+            Perfil
+          </a>
+          <a href="/app/diario" className={styles.mobileFloatingButton}>
+            Diário
+          </a>
+          <a href="/app/listas" className={styles.mobileFloatingButton}>
+            Listas
+          </a>
+          <a href="/app/minha-lista" className={styles.mobileFloatingButton}>
+            Minha Lista
+          </a>
+        </div>
+
+        <div className={styles.profileInfo}>
           <div className={styles.photoWrapper}>
             <img
               src={
                 user.foto ||
-                `https://ui-avatars.com/api/?name=${user.name}&background=e91e63&color=fff&bold=true`
+                `https://ui-avatars.com/api/?name=${user.name}&background=96300C&color=fff&bold=true&size=200`
               }
               alt="Foto de Perfil"
               className={styles.profilePicture}
@@ -105,53 +152,67 @@ export const ProfilePage = () => {
             />
 
             <label htmlFor="profilePicInput" className={styles.uploadLabel}>
-              <IconEdit />
+              <IconCamera />
             </label>
           </div>
 
           <h1 className={styles.userName}>
             {user.name} {user.last_name}
           </h1>
-          <span className={styles.userHandle}>@{user.username}</span>
         </div>
       </header>
 
-      <section className={styles.statsGrid}>
-        <div className={styles.statBox}>
-          <span className={styles.statNumber}>{mockStats.avaliacoes}</span>
-          <span className={styles.statLabel}>Avaliações</span>
+      <section className={styles.section}>
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.sectionTitle}>Favoritos</h2>
+          <button className={styles.seeAllButton} aria-label="Ver todos">
+            <IconChevronRight />
+          </button>
         </div>
-        <div className={styles.statBox}>
-          <span className={styles.statNumber}>{mockStats.listas}</span>
-          <span className={styles.statLabel}>Listas</span>
-        </div>
-        <div className={styles.statBox}>
-          <span className={styles.statNumber}>{mockStats.seguindo}</span>
-          <span className={styles.statLabel}>Seguindo</span>
-        </div>
-      </section>
 
-      <section>
-        <div className={styles.listCard}>
-          <h2 className={styles.listTitle}>Pratos Favoritos</h2>
-
-          <div>
-            {mockPratosFavoritos.map((prato) => (
-              <div key={prato.id} className={styles.listItem}>
-                <div className={styles.listItemIcon}>
-                  <IconPlate />
-                </div>
-                <div className={styles.listItemContent}>
-                  <h3 className={styles.listItemTitle}>{prato.nome}</h3>
-                  <p className={styles.listItemSubtitle}>{prato.restaurante}</p>
-                </div>
+        <div className={styles.gridContainer}>
+          {mockFavoritos.map((item) => (
+            <div key={item.id} className={styles.gridItem}>
+              <img
+                src={item.imagem}
+                alt={item.nome}
+                className={styles.gridImage}
+              />
+              <div className={styles.gridInfo}>
+                <span className={styles.gridRating}>★★★</span>
+                <button className={styles.gridMenu}>⋯</button>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </section>
 
-      <section className={styles.logoutButtonSection}>
+      <section className={styles.section}>
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.sectionTitle}>Atividade Recente</h2>
+          <button className={styles.seeAllButton} aria-label="Ver todos">
+            <IconChevronRight />
+          </button>
+        </div>
+
+        <div className={styles.gridContainer}>
+          {mockAtividadeRecente.map((item) => (
+            <div key={item.id} className={styles.gridItem}>
+              <img
+                src={item.imagem}
+                alt={item.nome}
+                className={styles.gridImage}
+              />
+              <div className={styles.gridInfo}>
+                <span className={styles.gridRating}>★★★</span>
+                <button className={styles.gridMenu}>⋯</button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className={styles.logoutSection}>
         <button onClick={handleLogout} className={styles.logoutButton}>
           Sair (Logout)
         </button>
