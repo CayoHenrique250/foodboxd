@@ -124,7 +124,7 @@
 
 @media (max-width: 768px) {
   .foodCard {
-    min-width: 180px; /* Ajuste se necessário */
+    min-width: 180px;
     height: 260px;
   }
   
@@ -132,8 +132,7 @@
     font-size: 1.8rem;
   }
 
-  /* ADICIONE ISSO AQUI: */
-  /* Esconde a logo de dentro da página no mobile para não duplicar com o Header do Layout */
+
   .headerLogo {
     display: none;
   }
