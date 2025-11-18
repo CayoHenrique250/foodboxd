@@ -1,0 +1,274 @@
+.appContainer {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.sidebar {
+  display: none;
+  flex-direction: column;
+  width: 220px;
+  background-color: #96300C;
+  border-right: 1px solid #2A2A2A;
+  padding: 20px 12px;
+  overflow-y: auto;
+  transition: width 0.3s ease, padding 0.3s ease;
+}
+
+.sidebarCollapsed {
+  width: 70px;
+  padding: 20px 8px;
+}
+
+.hamburgerButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 24px;
+  background-color: transparent;
+  border: none;
+  border-radius: 10px;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.hamburgerButton:hover {
+  background-color: #73370D;
+  color: #FFFFFF;
+}
+
+.hamburgerButton svg {
+  width: 24px;
+  height: 24px;
+}
+
+.sidebarNav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.sidebarLink {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  text-decoration: none;
+  color: #ffffff;
+  transition: all 0.2s ease;
+  border-radius: 10px;
+  font-size: 15px;
+  margin-top: 8vh;
+  font-weight: 500;
+}
+
+.sidebarCollapsed .sidebarLink {
+  justify-content: center;
+  padding: 12px;
+}
+
+.sidebarLink:hover {
+  background-color: #73370D;
+  color: #FFFFFF;
+}
+
+.sidebarLink svg {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.sidebarLinkActive {
+  background-color: #96300C;
+  color: #FFFFFF;
+}
+
+.sidebarLinkActive:hover {
+  background-color: #B33C0F;
+}
+
+.sidebarLabel {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.sidebarCollapsed .sidebarLabel {
+  display: none;
+}
+
+.sidebarFooter {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #b6713f;
+}
+
+.settingsButton {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  text-decoration: none;
+  color: #ffffff;
+  transition: all 0.2s ease;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.sidebarCollapsed .settingsButton {
+  justify-content: center;
+  padding: 12px;
+}
+
+.settingsButton:hover {
+  background-color: #73370D;
+  color: #FFFFFF;
+}
+
+.settingsButton svg {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.mainContent {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+  padding-bottom: 100px;
+  position: relative;
+}
+
+.floatingButtons {
+  display: none;
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #96300C;
+  border-radius: 20px;
+  padding: 8px;
+  gap: 100px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  z-index: 100;
+}
+
+.floatingButton {
+  padding: 15px 4vw;
+  border-radius: 15px;
+  background-color: transparent;
+  border: none;
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.floatingButton:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.floatingButtonActive {
+  background-color: #73370D;
+}
+
+.floatingButtonActive:hover {
+  background-color: #B33C0F;
+}
+
+.bottomNav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 64px;
+  background-color: #96300C;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+}
+
+.bottomNavLink {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.7);
+  flex-grow: 1;
+  height: 100%;
+  transition: all 0.2s ease;
+  gap: 4px;
+}
+
+.bottomNavLink svg {
+  width: 24px;
+  height: 24px;
+}
+
+.bottomNavLinkActive {
+  color: #FFFFFF;
+  background-color: #73370D;
+}
+
+.bottomNavLabel {
+  font-size: 11px;
+  font-weight: 500;
+}
+
+@media (min-width: 768px) {
+  .sidebar {
+    display: flex;
+  }
+
+  .floatingButtons {
+    display: flex;
+  }
+
+  .bottomNav {
+    display: none;
+  }
+
+  .mainContent {
+    padding-bottom: 100px;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 767px) and (min-width: 481px) {
+  .mainContent {
+    padding: 16px;
+    padding-bottom: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mainContent {
+    padding: 12px;
+    padding-bottom: 80px;
+  }
+
+  .bottomNav {
+    height: 60px;
+  }
+
+  .bottomNavLink svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .bottomNavLabel {
+    font-size: 10px;
+  }
+}

@@ -14,6 +14,8 @@ interface FormInputs {
 export const RegisterPage = () => {
   const navigate = useNavigate();
   const [apiError, setApiError] = useState<string | null>(null);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword2, setShowPassword2] = useState(false);
 
   const {
     register,
@@ -59,7 +61,11 @@ export const RegisterPage = () => {
   return (
     <div className={styles.container}>
       <div className={styles.card}>
-        <h1 className={styles.logo}>FoodBoxd</h1>
+        <img
+          className={styles.logo}
+          src="../../public/logo-backGray-horizontal.png"
+          alt=""
+        />
         <h2 className={styles.subtitle}>Crie sua conta</h2>
 
         {apiError && <div className={styles.apiError}>{apiError}</div>}
@@ -119,18 +125,52 @@ export const RegisterPage = () => {
             <label htmlFor="password" className={styles.label}>
               Senha
             </label>
-            <input
-              id="password"
-              type="password"
-              className={styles.input}
-              {...register("password", {
-                required: "Senha é obrigatória",
-                minLength: {
-                  value: 8,
-                  message: "A senha deve ter pelo menos 8 caracteres",
-                },
-              })}
-            />
+            <div className={styles.passwordWrapper}>
+              <input
+                id="password"
+                type={showPassword ? "text" : "password"}
+                className={styles.input}
+                {...register("password", {
+                  required: "Senha é obrigatória",
+                  minLength: {
+                    value: 8,
+                    message: "A senha deve ter pelo menos 8 caracteres",
+                  },
+                })}
+              />
+              <button
+                type="button"
+                className={styles.togglePassword}
+                onClick={() => setShowPassword(!showPassword)}
+                aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
+              >
+                {showPassword ? (
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
+                    <line x1="1" y1="1" x2="23" y2="23" />
+                  </svg>
+                ) : (
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                )}
+              </button>
+            </div>
             {errors.password && (
               <span className={styles.error}>{errors.password.message}</span>
             )}
@@ -140,16 +180,50 @@ export const RegisterPage = () => {
             <label htmlFor="password2" className={styles.label}>
               Confirme sua Senha
             </label>
-            <input
-              id="password2"
-              type="password"
-              className={styles.input}
-              {...register("password2", {
-                required: "Confirmação de senha é obrigatória",
-                validate: (value) =>
-                  value === passwordValue || "As senhas não coincidem",
-              })}
-            />
+            <div className={styles.passwordWrapper}>
+              <input
+                id="password2"
+                type={showPassword2 ? "text" : "password"}
+                className={styles.input}
+                {...register("password2", {
+                  required: "Confirmação de senha é obrigatória",
+                  validate: (value) =>
+                    value === passwordValue || "As senhas não coincidem",
+                })}
+              />
+              <button
+                type="button"
+                className={styles.togglePassword}
+                onClick={() => setShowPassword2(!showPassword2)}
+                aria-label={showPassword2 ? "Ocultar senha" : "Mostrar senha"}
+              >
+                {showPassword2 ? (
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
+                    <line x1="1" y1="1" x2="23" y2="23" />
+                  </svg>
+                ) : (
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                )}
+              </button>
+            </div>
             {errors.password2 && (
               <span className={styles.error}>{errors.password2.message}</span>
             )}
