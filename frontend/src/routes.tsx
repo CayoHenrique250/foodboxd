@@ -8,10 +8,10 @@ import { LoginPage } from "./pages/LoginPage";
 import { RegisterPage } from "./pages/RegisterPage";
 import { ProfilePage } from './pages/ProfilePage';
 import SearchPage from "./pages/SearchPage";
+import RecommendationsPage from "./pages/RecommendationsPage";
 
 const DashboardPage = () => <div>Tela de Dashboard</div>;
-const RecomendacoesPage = () => <div>Tela de Recomendações</div>;
-const PesquisaPage = () => <div>Tela de Pesquisa</div>;
+const SeguindoPage = () => <div>Tela de Seguindo</div>;
 const AmigosPage = () => <div>Tela de Amigos</div>;
 const DiarioPage = () => <div>Tela de Diário</div>;
 const ListasPage = () => <div>Tela de Listas</div>;
@@ -48,8 +48,12 @@ export const router = createBrowserRouter([
             element: <DashboardPage />,
           },
           {
+            path: "seguindo",
+            element: <SeguindoPage />,
+          },
+          {
             path: "recomendacoes",
-            element: <RecomendacoesPage />,
+            element: <RecommendationsPage/>,
           },
 
           {
