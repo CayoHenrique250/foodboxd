@@ -104,14 +104,14 @@
   color: white;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .pageContainer {
     padding: 1rem;
     padding-bottom: 100px; 
   }
 
   .headerLogo {
-    gap: 0px; 
+    display: none;
   }
 
 }

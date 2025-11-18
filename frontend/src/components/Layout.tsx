@@ -113,9 +113,24 @@ export const AppLayout = () => {
       </aside>
 
       <main className={styles.mainContent}>
-        <Outlet />
+        <div className={styles.mobileHeader}>
+          <div className={styles.mobileTopBar}>
+            <NavLink to="/app/configuracoes" className={styles.mobileSettingsIcon}>
+              <IconSettings />
+            </NavLink>
+            <div className={styles.mobileLogoContainer}>
+              <img
+                src="/logo-backBlack-horizontal.png"
+                alt="FoodBoxd"
+                className={styles.mobileLogo}
+              />
+            </div>
+          </div>
+        </div>
 
         <FloatingButtons />
+        
+        <Outlet />
       </main>
 
       <nav className={styles.bottomNav}>

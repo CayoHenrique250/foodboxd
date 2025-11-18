@@ -1,18 +1,15 @@
-/* RecommendationsPage.module.css */
-
 .pageContainer {
   background-color: transparent; 
   color: #ffffff;
   width: 100%;
   min-height: 100%;
   padding: 1rem 2rem;
-  padding-bottom: 100px; /* Espaço para menu flutuante não cobrir */
+  padding-bottom: 100px; 
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* --- HEADER DO LOGO --- */
 .headerLogo {
   display: flex;
   justify-content: center;
@@ -22,16 +19,14 @@
   margin-bottom: 2rem;
 }
 
-/* SUA CONFIGURAÇÃO DE IMAGEM AQUI */
 .logoImage {
-  width: clamp(150px, 40vw, 280px); /* Tamanho dinâmico: mín 150px, ideal 40% da tela, máx 280px */
+  width: clamp(150px, 40vw, 280px); 
   height: auto; 
   object-fit: contain; 
   margin: 0;
   display: block;
 }
 
-/* --- GRID --- */
 .gridContainer {
   display: grid;
   width: 100%;
@@ -66,7 +61,7 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: #a03615; /* Laranja */
+  background-color: #a03615; 
   padding: 12px 15px;
 }
 
@@ -77,49 +72,17 @@
   font-family: 'Segoe UI', sans-serif;
 }
 
-/* --- MENU FLUTUANTE --- */
-.floatingMenu {
-  position: fixed;
-  bottom: 90px; /* Acima da navbar principal */
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #8c2f12; /* Marrom escuro */
-  padding: 8px 10px;
-  border-radius: 50px;
-  display: flex;
-  gap: 5px;
-  align-items: center;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-  z-index: 50;
-}
-
-.menuItem {
-  padding: 8px 20px;
-  border-radius: 30px;
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 0.9rem;
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-.activeItem {
-  background-color: rgba(0,0,0,0.2);
-  color: white;
-  font-weight: bold;
-}
-
-/* --- MOBILE --- */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .pageContainer {
     padding: 1rem;
     padding-bottom: 140px;
   }
+
+  .headerLogo {
+    display: none;
+  }
   
   .gridContainer {
     grid-template-columns: 1fr;
-  }
-  
-  .floatingMenu {
-    bottom: 80px; 
   }
 }

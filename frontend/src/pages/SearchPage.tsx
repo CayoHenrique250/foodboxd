@@ -20,8 +20,6 @@ const SearchPage: React.FC = () => {
   return (
     <div className={styles.pageContainer}>
       
-      
-      {/* 2. AQUI ESTÁ A TROCA DO TEXTO PELA IMAGEM */}
       <header className={styles.headerLogo}>
         <img 
           src={logoImg} 
@@ -30,7 +28,6 @@ const SearchPage: React.FC = () => {
         />
       </header>
 
-      {/* Barra de Pesquisa */}
       <div className={styles.searchContainer}>
         <FiSearch className={styles.searchIcon} />
         <input 
@@ -40,7 +37,6 @@ const SearchPage: React.FC = () => {
         />
       </div>
 
-      {/* Lista de Filtros */}
       <div className={styles.optionsList}>
         <span className={styles.optionsHeader}>Pesquise por:</span>
         

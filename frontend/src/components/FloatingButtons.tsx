@@ -14,13 +14,17 @@ const profileButtons: FloatingButton[] = [
   { to: "/app/minha-lista", label: "Minha Lista" },
 ];
 
+const dashboardButtons: FloatingButton[] = [
+  { to: "/app/dashboard", label: "Home" },
+  { to: "/app/seguindo", label: "Seguindo" },
+  { to: "/app/listas", label: "Listas" },
+  { to: "/app/recomendacoes", label: "Recomendações" },
+];
+
 const buttonsByRoute: Record<string, FloatingButton[]> = {
-  "/app/dashboard": [
-    { to: "/app/dashboard", label: "Home" },
-    { to: "/app/seguindo", label: "Seguindo" },
-    { to: "/app/listas", label: "Listas" },
-    { to: "/app/recomendacoes", label: "Recomendações" },
-  ],
+  "/app/dashboard": dashboardButtons,
+  "/app/seguindo": dashboardButtons,
+  "/app/recomendacoes": dashboardButtons,
   "/app/amigos": [
     { to: "/app/amigos", label: "Amigos" },
     { to: "/app/voce", label: "Você" },

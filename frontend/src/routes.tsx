@@ -11,6 +11,7 @@ import SearchPage from "./pages/SearchPage";
 import RecommendationsPage from "./pages/RecommendationsPage";
 
 const DashboardPage = () => <div>Tela de Dashboard</div>;
+const SeguindoPage = () => <div>Tela de Seguindo</div>;
 const AmigosPage = () => <div>Tela de Amigos</div>;
 const DiarioPage = () => <div>Tela de Diário</div>;
 const ListasPage = () => <div>Tela de Listas</div>;
@@ -45,6 +46,10 @@ export const router = createBrowserRouter([
           {
             path: "dashboard",
             element: <DashboardPage />,
+          },
+          {
+            path: "seguindo",
+            element: <SeguindoPage />,
           },
           {
             path: "recomendacoes",

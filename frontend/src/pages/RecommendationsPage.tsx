@@ -58,13 +58,6 @@ const RecommendationsPage: React.FC = () => {
         ))}
       </div>
 
-      <div className={styles.floatingMenu}>
-        <span className={styles.menuItem}>Home</span>
-        <span className={styles.menuItem}>Seguindo</span>
-        <span className={styles.menuItem}>Listas</span>
-        <span className={`${styles.menuItem} ${styles.activeItem}`}>Recomendações</span>
-      </div>
-
     </div>
   );
 };

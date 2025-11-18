@@ -117,21 +117,6 @@ export const ProfilePage = () => {
           </div>
         </div>
 
-        <div className={styles.mobileFloatingButtons}>
-          <a href="/app/perfil" className={styles.mobileFloatingButton}>
-            Perfil
-          </a>
-          <a href="/app/diario" className={styles.mobileFloatingButton}>
-            Diário
-          </a>
-          <a href="/app/listas" className={styles.mobileFloatingButton}>
-            Listas
-          </a>
-          <a href="/app/minha-lista" className={styles.mobileFloatingButton}>
-            Minha Lista
-          </a>
-        </div>
-
         <div className={styles.profileInfo}>
           <div className={styles.photoWrapper}>
             <img

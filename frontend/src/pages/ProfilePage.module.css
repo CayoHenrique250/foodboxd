@@ -36,7 +36,7 @@
   transform: translateY(-50%);
   width: 32px;
   height: 32px;
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: center;
   color: #9e9e9e;
@@ -61,34 +61,6 @@
   width: 280px;
   max-width: 90%;
   height: auto;
-}
-
-.mobileFloatingButtons {
-  display: none;
-  width: 100vw;
-  background-color: #96300c;
-  padding: 6px;
-  gap: 4px;
-  margin-bottom: 24px;
-}
-
-.mobileFloatingButton {
-  flex: 1;
-  padding: 10px 16px;
-  background-color: transparent;
-  border: none;
-  color: #ffffff;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  text-decoration: none;
-  text-align: center;
-  white-space: nowrap;
-}
-
-.mobileFloatingButton:hover {
-  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .profileInfo {
@@ -323,21 +295,9 @@
   }
 }
 
-@media (max-width: 768px) {
-  .settingsIcon {
-    display: flex;
-  }
-
-  .logoContainer {
-    margin-bottom: 0;
-  }
-
-  .mobileFloatingButtons {
-    display: flex;
-  }
-
-  .logo {
-    width: 220px;
+@media (max-width: 767px) {
+  .topBar {
+    display: none;
   }
 
   .profilePicture {
@@ -367,33 +327,6 @@
 }
 
 @media (max-width: 480px) {
-  .topBar {
-    margin-bottom: 16px;
-  }
-
-  .settingsIcon {
-    left: 8px;
-  }
-
-  .settingsIcon svg {
-    width: 24px;
-    height: 24px;
-  }
-
-  .mobileFloatingButtons {
-    padding: 4px;
-    margin-bottom: 20px;
-  }
-
-  .mobileFloatingButton {
-    padding: 8px 12px;
-    font-size: 12px;
-  }
-
-  .logo {
-    width: 180px;
-  }
-
   .profilePicture {
     width: 100px;
     height: 100px;
