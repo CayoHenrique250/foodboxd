@@ -1,0 +1,147 @@
+/* FriendsPage.module.css */
+
+.pageContainer {
+  background-color: transparent;
+  color: #ffffff;
+  width: 100%;
+  min-height: 100%;
+  padding: 1rem 1.5rem;
+  /* Garante espaço no final para o conteúdo não ficar por baixo do menu global (que é flutuante) */
+  padding-bottom: 120px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* --- HEADER (Logo) --- */
+.headerLogo {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  /* Espaço abaixo da logo, antes do Toggle */
+  margin-bottom: 20px; 
+}
+
+.logoImage {
+  width: clamp(150px, 40vw, 250px);
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* --- LISTA DE ATIVIDADES --- */
+.activityList {
+  width: 100%;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px; 
+  /* Espaço acima da lista, para separar do Toggle */
+  margin-top: 30px;
+}
+
+.activityItem {
+  display: flex;
+  align-items: flex-start; 
+  gap: 15px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%; 
+  object-fit: cover;
+  flex-shrink: 0; 
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.contentContainer {
+  flex: 1; 
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: #e0e0e0;
+}
+
+.username {
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.restaurantName {
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.stars {
+  display: inline-flex;
+  align-items: center;
+  margin: 0 5px;
+  color: #ffffff; 
+  font-size: 0.8rem;
+  gap: 2px;
+}
+
+.time {
+  font-size: 0.85rem;
+  color: #888888;
+  white-space: nowrap; 
+  margin-left: 10px;
+  margin-top: 2px;
+}
+
+.toggleContainer {
+  
+  background-color: #8c2f12; 
+  border-radius: 50px;
+  padding: 5px;
+  display: flex;
+  width: 300px; 
+  max-width: 100%; 
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+
+.toggleButton {
+  flex: 1;
+  text-align: center;
+  padding: 8px 0;
+  border-radius: 40px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.activeButton {
+  background-color: rgba(0, 0, 0, 0.2); 
+  color: #ffffff;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .pageContainer {
+    padding: 1rem;
+    padding-bottom: 150px; 
+  }
+  
+  .logoImage {
+    width: 180px;
+  }
+  
+  .avatar {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .contentContainer {
+    font-size: 0.85rem;
+  }
+
+  .toggleContainer {
+    width: 90%; 
+  }
+
+  .headerLogo {
+    display: none;
+  }
+}
