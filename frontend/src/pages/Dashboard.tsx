@@ -109,7 +109,7 @@ const DashboardPage: React.FC = () => {
         </div>
       </section>
       
-      <FloatingButtons />
+      {/* <FloatingButtons /> */}
     </div>
   );
 };
