@@ -4,7 +4,7 @@ import styles from "./Layout.module.css";
 import { FloatingButtons } from "./FloatingButtons";
 
 export const AppLayout = () => {
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true);
 
   const toggleSidebar = () => {
     setIsSidebarCollapsed(!isSidebarCollapsed);
@@ -18,7 +18,7 @@ export const AppLayout = () => {
         }`}
       >
         <button className={styles.hamburgerButton} onClick={toggleSidebar}>
-          <IconMenu />
+          {isSidebarCollapsed ? <IconMenu /> : <IconClose />}
         </button>
 
         <nav className={styles.sidebarNav}>
@@ -159,6 +159,16 @@ const IconMenu = () => (
       strokeLinecap="round"
       strokeLinejoin="round"
       d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+    />
+  </svg>
+);
+
+const IconClose = () => (
+  <svg fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M6 18L18 6M6 6l12 12"
     />
   </svg>
 );

@@ -13,9 +13,9 @@ import Dashboard from "./pages/Dashboard";
 import FriendsPage from "./pages/FriendsPage";
 import ListsPage from "./pages/ListsPage";
 import MyListPage from "./pages/MyListPage";
+import DailyPage from "./pages/DailyPage";
 
 const SeguindoPage = () => <div>Tela de Seguindo</div>;
-const DiarioPage = () => <div>Tela de Diário</div>;
 
 const RootRedirect = () => {
   const { token } = useAuthStore();
@@ -70,7 +70,7 @@ export const router = createBrowserRouter([
           },
           {
             path: "diario",
-            element: <DiarioPage />,
+            element: <DailyPage />,
           },
           {
             path: "listas",
