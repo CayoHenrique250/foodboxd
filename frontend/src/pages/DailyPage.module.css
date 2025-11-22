@@ -1,0 +1,263 @@
+.pageContainer {
+  background-color: transparent;
+  color: #ffffff;
+  width: 100%;
+  padding: 0;
+  padding-bottom: 120px;
+  display: block;
+  flex-direction: column;
+  overflow-x: hidden;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.headerLogo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.logoImage {
+  width: clamp(150px, 40vw, 280px);
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.contentContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+}
+
+.monthSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.monthHeader {
+  width: 100vw;
+  margin-left: 0;
+  padding: 7px 15vw;
+  background-color: #96300c;
+  border-radius: 0;
+  position: relative;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .monthHeader {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+  }
+}
+
+
+.monthTitle {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0;
+  text-align: left;
+}
+
+.itemsList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.itemCard {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px;
+  background-color: rgba(255, 255, 255, 0.02);
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.itemCard:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.daySquare {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  background-color: #96300c;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.dayNumber {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.itemThumbnail {
+  width: 100px;
+  min-width: 100px;
+  height: 140px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.thumbnailImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.itemInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.itemName {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #ffffff;
+  margin: 0;
+}
+
+.itemRating {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.starIcon {
+  color: #ffffff;
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.menuButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #ffffff;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease;
+  flex-shrink: 0;
+}
+
+.menuButton:hover {
+  opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+  .pageContainer {
+    padding: 1rem;
+    padding-bottom: 150px;
+  }
+
+  .headerLogo {
+    display: none;
+  }
+
+  .contentContainer {
+    gap: 28px;
+  }
+
+  .monthSection {
+    gap: 14px;
+  }
+
+  .itemCard {
+    gap: 12px;
+    padding: 6px;
+  }
+
+  .daySquare {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+  }
+
+  .dayNumber {
+    font-size: 1.1rem;
+  }
+
+  .itemThumbnail {
+    width: 90px;
+    min-width: 90px;
+    height: 130px;
+  }
+
+  .itemName {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .pageContainer {
+    padding: 0.75rem;
+  }
+
+  .contentContainer {
+    gap: 24px;
+  }
+
+  .monthSection {
+    gap: 12px;
+  }
+
+  .itemsList {
+    gap: 12px;
+  }
+
+  .itemCard {
+    gap: 10px;
+    padding: 6px;
+  }
+
+  .daySquare {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+  }
+
+  .dayNumber {
+    font-size: 1rem;
+  }
+
+  .itemThumbnail {
+    width: 80px;
+    min-width: 80px;
+    height: 120px;
+  }
+
+  .itemName {
+    font-size: 0.9rem;
+  }
+
+  .starIcon {
+    width: 12px;
+    height: 12px;
+  }
+}
+
