@@ -10,11 +10,11 @@ import { ProfilePage } from './pages/ProfilePage';
 import SearchPage from "./pages/SearchPage";
 import RecommendationsPage from "./pages/RecommendationsPage";
 import Dashboard from "./pages/Dashboard";
-import Friends from "./pages/FriendsPage";
+import FriendsPage from "./pages/FriendsPage";
+import ListsPage from "./pages/ListsPage";
 
 const SeguindoPage = () => <div>Tela de Seguindo</div>;
 const DiarioPage = () => <div>Tela de Diário</div>;
-const ListasPage = () => <div>Tela de Listas</div>;
 const MinhaListaPage = () => <div>Tela Minha Lista</div>;
 
 const RootRedirect = () => {
@@ -62,7 +62,7 @@ export const router = createBrowserRouter([
           },
           {
             path: "amigos",
-            element: <Friends />,
+            element: <FriendsPage/>,
           },
           {
             path: "perfil",
@@ -74,7 +74,7 @@ export const router = createBrowserRouter([
           },
           {
             path: "listas",
-            element: <ListasPage />,
+            element: <ListsPage />,
           },
           {
             path: "minha-lista",
