@@ -12,10 +12,10 @@ import RecommendationsPage from "./pages/RecommendationsPage";
 import Dashboard from "./pages/Dashboard";
 import FriendsPage from "./pages/FriendsPage";
 import ListsPage from "./pages/ListsPage";
+import MyListPage from "./pages/MyListPage";
 
 const SeguindoPage = () => <div>Tela de Seguindo</div>;
 const DiarioPage = () => <div>Tela de Diário</div>;
-const MinhaListaPage = () => <div>Tela Minha Lista</div>;
 
 const RootRedirect = () => {
   const { token } = useAuthStore();
@@ -78,7 +78,7 @@ export const router = createBrowserRouter([
           },
           {
             path: "minha-lista",
-            element: <MinhaListaPage />,
+            element: <MyListPage />,
           },
           {
             index: true,
