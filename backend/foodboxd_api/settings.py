@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-pug1d)z_@zhdp44@iobb-n)0#h^ne-mo@7fbys7u^=&z@2%h)w
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.0.110', 'localhost', '127.0.0.1', '0.0.0.0']
 
 
 # Application definition
@@ -129,10 +129,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Custom User Model
 AUTH_USER_MODEL = 'api.CustomUser'
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-]
+# CORS Configuration
+# In development, allow all origins for easier mobile testing
+if DEBUG:
+    CORS_ALLOW_ALL_ORIGINS = True
+else:
+    CORS_ALLOWED_ORIGINS = [
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+        "http://192.168.0.110:5173",  # Add your network IP here
+    ]
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
