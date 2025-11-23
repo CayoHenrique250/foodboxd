@@ -3,6 +3,7 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./LoginPage.module.css";
 import { useAuthStore } from "../store/auth.store";
+import { apiUrl } from "../config/api";
 
 interface FormInputs {
   email: string;
@@ -33,7 +34,7 @@ export const LoginPage = () => {
     setApiError(null);
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/login/", {
+      const response = await fetch(apiUrl("login/"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -43,22 +44,36 @@ export const LoginPage = () => {
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
-
-        setApiError(errorData.detail || "E-mail ou senha inválidos.");
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const errorData = await response.json();
+          setApiError(errorData.detail || "E-mail ou senha inválidos.");
+        } else {
+          const errorText = await response.text();
+          console.error("Resposta não-JSON do servidor:", errorText.substring(0, 200));
+          setApiError(
+            `Erro do servidor (${response.status}). Verifique se o backend está configurado corretamente.`
+          );
+        }
         return;
       }
 
       const { access } = await response.json();
 
-      const userResponse = await fetch("http://127.0.0.1:8000/api/users/me/", {
+      const userResponse = await fetch(apiUrl("users/me/"), {
         headers: {
           Authorization: `Bearer ${access}`,
         },
       });
 
       if (!userResponse.ok) {
-        throw new Error("Falha ao buscar dados do usuário após o login.");
+        const contentType = userResponse.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const errorData = await userResponse.json();
+          throw new Error(errorData.detail || "Falha ao buscar dados do usuário após o login.");
+        } else {
+          throw new Error(`Erro do servidor (${userResponse.status}). Verifique se o backend está configurado corretamente.`);
+        }
       }
 
       const userData = await userResponse.json();
@@ -68,7 +83,12 @@ export const LoginPage = () => {
       navigate("/app/dashboard");
     } catch (error) {
       console.error("Falha na requisição:", error);
-      setApiError("Não foi possível conectar ao servidor. Tente novamente.");
+      const errorMessage = error instanceof Error ? error.message : "Erro desconhecido";
+      console.error("Detalhes do erro:", errorMessage);
+      console.error("URL tentada:", apiUrl("login/"));
+      setApiError(
+        `Não foi possível conectar ao servidor. Verifique se o backend está rodando e acessível. Erro: ${errorMessage}`
+      );
     }
   };
 

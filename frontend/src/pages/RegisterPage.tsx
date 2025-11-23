@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./RegisterPage.module.css";
+import { apiUrl } from "../config/api";
 
 interface FormInputs {
   first_name: string;
@@ -14,6 +15,7 @@ interface FormInputs {
 export const RegisterPage = () => {
   const navigate = useNavigate();
   const [apiError, setApiError] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
 
@@ -29,9 +31,10 @@ export const RegisterPage = () => {
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
     setApiError(null);
+    setSuccessMessage(null);
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/register/", {
+      const response = await fetch(apiUrl("register/"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -41,20 +44,39 @@ export const RegisterPage = () => {
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
-        const firstErrorKey = Object.keys(errorData)[0];
-        const firstErrorMessage = errorData[firstErrorKey][0];
+        // Check if response is JSON
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const errorData = await response.json();
+          const firstErrorKey = Object.keys(errorData)[0];
+          const firstErrorMessage = errorData[firstErrorKey][0];
 
-        setApiError(
-          firstErrorMessage || "Falha ao cadastrar. Verifique os dados."
-        );
+          setApiError(
+            firstErrorMessage || "Falha ao cadastrar. Verifique os dados."
+          );
+        } else {
+          const errorText = await response.text();
+          console.error("Resposta não-JSON do servidor:", errorText.substring(0, 200));
+          setApiError(
+            `Erro do servidor (${response.status}). Verifique se o backend está configurado corretamente.`
+          );
+        }
         return;
       }
 
-      navigate("/login");
+      setSuccessMessage("Conta criada com sucesso! Redirecionando para o login...");
+      
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
     } catch (error) {
       console.error("Falha na requisição:", error);
-      setApiError("Não foi possível conectar ao servidor. Tente novamente.");
+      const errorMessage = error instanceof Error ? error.message : "Erro desconhecido";
+      console.error("Detalhes do erro:", errorMessage);
+      console.error("URL tentada:", apiUrl("register/"));
+      setApiError(
+        `Não foi possível conectar ao servidor. Verifique se o backend está rodando e acessível. Erro: ${errorMessage}`
+      );
     }
   };
 
@@ -69,6 +91,7 @@ export const RegisterPage = () => {
         <h2 className={styles.subtitle}>Crie sua conta</h2>
 
         {apiError && <div className={styles.apiError}>{apiError}</div>}
+        {successMessage && <div className={styles.successMessage}>{successMessage}</div>}
 
         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
           <div className={styles.inputGroup}>
