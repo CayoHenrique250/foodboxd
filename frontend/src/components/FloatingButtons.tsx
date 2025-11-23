@@ -29,6 +29,10 @@ const buttonsByRoute: Record<string, FloatingButton[]> = {
     { to: "/app/amigos", label: "Amigos" },
     { to: "/app/voce", label: "Você" },
   ],
+  "/app/voce": [
+    { to: "/app/amigos", label: "Amigos" },
+    { to: "/app/voce", label: "Você" },
+  ],
   "/app/perfil": profileButtons,
   "/app/diario": profileButtons,
   "/app/listas": profileButtons,

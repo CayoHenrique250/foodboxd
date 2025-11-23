@@ -1,0 +1,234 @@
+.pageContainer {
+  background-color: transparent;
+  color: #ffffff;
+  width: 100%;
+  min-height: 100%;
+  padding: 1rem 1.5rem;
+  padding-bottom: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.headerLogo {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.logoImage {
+  width: clamp(150px, 40vw, 250px);
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.searchContainer {
+  width: 100%;
+  max-width: 600px;
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888888;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 12px 16px 12px 48px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.searchInput::placeholder {
+  color: #888888;
+}
+
+.searchInput:focus {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.followingList {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.followingItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: background-color 0.2s ease;
+}
+
+.followingItem:last-child {
+  border-bottom: none;
+}
+
+.followingItem:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  cursor: pointer;
+}
+
+.avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  flex-shrink: 0;
+}
+
+.userDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.userName {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.userUsername {
+  font-size: 0.85rem;
+  color: #888888;
+  line-height: 1.2;
+}
+
+.unfollowButton {
+  padding: 8px 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.unfollowButton:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.unfollowButton:active {
+  transform: scale(0.98);
+}
+
+.emptyState {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  color: #888888;
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .pageContainer {
+    padding: 1rem;
+    padding-bottom: 150px;
+  }
+
+  .logoImage {
+    width: 180px;
+  }
+
+  .headerLogo {
+    display: none;
+  }
+
+  .searchContainer {
+    margin-bottom: 20px;
+  }
+
+  .avatar {
+    width: 48px;
+    height: 48px;
+  }
+
+  .userName {
+    font-size: 0.9rem;
+  }
+
+  .userUsername {
+    font-size: 0.8rem;
+  }
+
+  .unfollowButton {
+    padding: 6px 16px;
+    font-size: 0.85rem;
+  }
+
+  .followingItem {
+    padding: 12px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .searchInput {
+    font-size: 0.9rem;
+    padding: 10px 14px 10px 44px;
+  }
+
+  .searchIcon {
+    width: 18px;
+    height: 18px;
+    left: 14px;
+  }
+
+  .avatar {
+    width: 44px;
+    height: 44px;
+  }
+
+  .userName {
+    font-size: 0.85rem;
+  }
+
+  .userUsername {
+    font-size: 0.75rem;
+  }
+
+  .unfollowButton {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+}
+
