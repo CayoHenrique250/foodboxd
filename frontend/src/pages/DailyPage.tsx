@@ -107,7 +107,11 @@ const DailyPage: React.FC = () => {
                     </div>
                   </div>
 
-                  <button className={styles.menuButton}>
+                  <button 
+                    className={styles.menuButton}
+                    aria-label={`Menu para ${item.name}`}
+                    title={`Menu para ${item.name}`}
+                  >
                     <IconMenu />
                   </button>
                 </div>

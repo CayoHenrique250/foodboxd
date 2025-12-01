@@ -11,23 +11,28 @@ export const AppLayout = () => {
   };
 
   return (
-    <div className={styles.appContainer}>
+    <div className={`${styles.appContainer} appContainer`}>
       <aside
-        className={`${styles.sidebar} ${
-          isSidebarCollapsed ? styles.sidebarCollapsed : ""
+        className={`${styles.sidebar} sidebar ${
+          isSidebarCollapsed ? `${styles.sidebarCollapsed} sidebarCollapsed` : ""
         }`}
       >
-        <button className={styles.hamburgerButton} onClick={toggleSidebar}>
+        <button
+          className={`${styles.hamburgerButton} hamburgerButton`}
+          onClick={toggleSidebar}
+          aria-label="Alternar menu"
+          title="Alternar menu"
+        >
           {isSidebarCollapsed ? <IconMenu /> : <IconClose />}
         </button>
 
-        <nav className={styles.sidebarNav}>
+        <nav className={`${styles.sidebarNav} sidebarNav`}>
           <NavLink
             to="/app/dashboard"
             className={({ isActive }) =>
               isActive
-                ? `${styles.sidebarLink} ${styles.sidebarLinkActive}`
-                : styles.sidebarLink
+                ? `${styles.sidebarLink} sidebarLink ${styles.sidebarLinkActive} sidebarLinkActive`
+                : `${styles.sidebarLink} sidebarLink`
             }
             title="Início"
           >
@@ -41,8 +46,8 @@ export const AppLayout = () => {
             to="/app/pesquisa"
             className={({ isActive }) =>
               isActive
-                ? `${styles.sidebarLink} ${styles.sidebarLinkActive}`
-                : styles.sidebarLink
+                ? `${styles.sidebarLink} sidebarLink ${styles.sidebarLinkActive} sidebarLinkActive`
+                : `${styles.sidebarLink} sidebarLink`
             }
             title="Pesquisa"
           >
@@ -56,8 +61,8 @@ export const AppLayout = () => {
             to="/app/review"
             className={({ isActive }) =>
               isActive
-                ? `${styles.sidebarLink} ${styles.sidebarLinkActive}`
-                : styles.sidebarLink
+                ? `${styles.sidebarLink} sidebarLink ${styles.sidebarLinkActive} sidebarLinkActive`
+                : `${styles.sidebarLink} sidebarLink`
             }
             title="Review"
           >
@@ -71,8 +76,8 @@ export const AppLayout = () => {
             to="/app/amigos"
             className={({ isActive }) =>
               isActive
-                ? `${styles.sidebarLink} ${styles.sidebarLinkActive}`
-                : styles.sidebarLink
+                ? `${styles.sidebarLink} sidebarLink ${styles.sidebarLinkActive} sidebarLinkActive`
+                : `${styles.sidebarLink} sidebarLink`
             }
             title="Amigos"
           >
@@ -86,8 +91,8 @@ export const AppLayout = () => {
             to="/app/perfil"
             className={({ isActive }) =>
               isActive
-                ? `${styles.sidebarLink} ${styles.sidebarLinkActive}`
-                : styles.sidebarLink
+                ? `${styles.sidebarLink} sidebarLink ${styles.sidebarLinkActive} sidebarLinkActive`
+                : `${styles.sidebarLink} sidebarLink`
             }
             title="Perfil"
           >
@@ -98,10 +103,10 @@ export const AppLayout = () => {
           </NavLink>
         </nav>
 
-        <div className={styles.sidebarFooter}>
+        <div className={`${styles.sidebarFooter} sidebarFooter`}>
           <NavLink
             to="/app/configuracoes"
-            className={styles.settingsButton}
+            className={`${styles.settingsButton} settingsButton`}
             title="Configurações"
           >
             <IconSettings />
@@ -112,17 +117,22 @@ export const AppLayout = () => {
         </div>
       </aside>
 
-      <main className={styles.mainContent}>
-        <div className={styles.mobileHeader}>
+      <main className={`${styles.mainContent} mainContent`}>
+        <div className={`${styles.mobileHeader} mobileHeader`}>
           <div className={styles.mobileTopBar}>
-            <NavLink to="/app/configuracoes" className={styles.mobileSettingsIcon}>
+            <NavLink 
+              to="/app/configuracoes" 
+              className={styles.mobileSettingsIcon}
+              title="Configurações"
+              aria-label="Configurações"
+            >
               <IconSettings />
             </NavLink>
             <div className={styles.mobileLogoContainer}>
               <img
                 src="/logo-backBlack-horizontal.png"
                 alt="FoodBoxd"
-                className={styles.mobileLogo}
+                className={`${styles.mobileLogo} mobileLogo`}
               />
             </div>
           </div>
@@ -133,19 +143,19 @@ export const AppLayout = () => {
         <Outlet />
       </main>
 
-      <nav className={styles.bottomNav}>
+      <nav className={`${styles.bottomNav} bottomNav`}>
         {mobileNavLinks.map((link) => (
           <NavLink
             key={link.to}
             to={link.to}
             className={({ isActive }) =>
               isActive
-                ? `${styles.bottomNavLink} ${styles.bottomNavLinkActive}`
-                : styles.bottomNavLink
+                ? `${styles.bottomNavLink} bottomNavLink ${styles.bottomNavLinkActive} bottomNavLinkActive`
+                : `${styles.bottomNavLink} bottomNavLink`
             }
           >
             {link.icon}
-            <span className={styles.bottomNavLabel}>{link.label}</span>
+            <span className={`${styles.bottomNavLabel} bottomNavLabel`}>{link.label}</span>
           </NavLink>
         ))}
       </nav>

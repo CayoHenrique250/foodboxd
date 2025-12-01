@@ -44,7 +44,6 @@ export const RegisterPage = () => {
       });
 
       if (!response.ok) {
-        // Check if response is JSON
         const contentType = response.headers.get("content-type");
         if (contentType && contentType.includes("application/json")) {
           const errorData = await response.json();
@@ -85,7 +84,7 @@ export const RegisterPage = () => {
       <div className={styles.card}>
         <img
           className={styles.logo}
-          src="../../public/logo-backGray-horizontal.png"
+          src="/logo-backGray-horizontal.png?url"
           alt=""
         />
         <h2 className={styles.subtitle}>Crie sua conta</h2>
@@ -93,7 +92,7 @@ export const RegisterPage = () => {
         {apiError && <div className={styles.apiError}>{apiError}</div>}
         {successMessage && <div className={styles.successMessage}>{successMessage}</div>}
 
-        <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+        <form noValidate onSubmit={handleSubmit(onSubmit)} className={styles.form}>
           <div className={styles.inputGroup}>
             <label htmlFor="first_name" className={styles.label}>
               Nome

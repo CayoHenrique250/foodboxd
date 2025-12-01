@@ -95,16 +95,37 @@ const ListsPage: React.FC = () => {
                 <h2 className={styles.sectionTitle}>{lista.title}</h2>
                 <span className={styles.sectionCount}>{lista.count}</span>
               </div>
-              <FiArrowRightCircle className={styles.arrowIcon} />
+              <div 
+                role="button" 
+                tabIndex={0} 
+                aria-label={`Ver mais itens de ${lista.title}`}
+                title={`Ver mais itens de ${lista.title}`}
+                className={styles.arrowIconContainer}
+              >
+                <FiArrowRightCircle className={styles.arrowIcon} />
+              </div>
             </div>
 
             <div
               className={styles.horizontalScroll}
               ref={(el) => setScrollRef(lista.id, el)}
+              tabIndex={0}
+              role="region"
+              aria-label={`Lista ${lista.title}, use as setas do teclado para navegar`}
               onMouseDown={(e) => startDragging(e, lista.id)}
               onMouseLeave={stopDragging}
               onMouseUp={stopDragging}
               onMouseMove={(e) => onMouseMove(e, lista.id)}
+              onKeyDown={(e) => {
+                if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+                  e.preventDefault();
+                  const scrollAmount = 200;
+                  const ref = scrollRefs.current[lista.id];
+                  if (ref) {
+                    ref.scrollLeft += e.key === 'ArrowRight' ? scrollAmount : -scrollAmount;
+                  }
+                }
+              }}
             >
               {lista.items.map((item) => (
                 <div key={item.id} className={styles.listCard}>

@@ -3,8 +3,6 @@ import styles from './ReviewPage.module.css';
 import { FiUpload, FiX, FiPlus, FiTrash2 } from 'react-icons/fi';
 import { FaStar, FaRegStar } from 'react-icons/fa';
 
-const logoImg = "/logo-backBlack-horizontal.png";
-
 interface UploadedImage {
   id: string;
   file: File;
@@ -182,18 +180,18 @@ const ReviewPage: React.FC = () => {
   return (
     <div className={styles.pageContainer}>
       <header className={styles.headerLogo}>
-        <img src={logoImg} alt="Food Boxd" className={styles.logoImage} />
+        <img src="/logo-backBlack-horizontal.png" alt="Food Boxd" className={styles.logoImage} />
       </header>
 
-      <div className={styles.tabsContainer}>
+      <div className={`${styles.tabsContainer} tabsContainer`}>
         <button
-          className={`${styles.tab} ${activeTab === 'review' ? styles.tabActive : ''}`}
+          className={`${styles.tab} ${activeTab === 'review' ? styles.tabActive : ''} tab ${activeTab === 'review' ? 'tabActive' : ''}`}
           onClick={() => setActiveTab('review')}
         >
           Nova Avaliação
         </button>
         <button
-          className={`${styles.tab} ${activeTab === 'list' ? styles.tabActive : ''}`}
+          className={`${styles.tab} ${activeTab === 'list' ? styles.tabActive : ''} tab ${activeTab === 'list' ? 'tabActive' : ''}`}
           onClick={() => setActiveTab('list')}
         >
           Criar Lista
@@ -202,14 +200,15 @@ const ReviewPage: React.FC = () => {
 
       <div className={styles.contentContainer}>
         {activeTab === 'review' ? (
-          <form onSubmit={handleSubmitReview} className={styles.form}>
+          <form onSubmit={handleSubmitReview} className={`${styles.form} form`}>
             <div className={styles.formSection}>
               <h2 className={styles.sectionTitle}>Detalhes da Avaliação</h2>
               
               <div className={styles.inputGroup}>
-                <label className={styles.label}>Restaurante *</label>
+                <label htmlFor="restaurant" className={`${styles.label} label`}>Restaurante *</label>
                 <select
-                  className={styles.select}
+                  id="restaurant"
+                  className={`${styles.select} select`}
                   value={selectedRestaurant}
                   onChange={(e) => setSelectedRestaurant(e.target.value)}
                   required
@@ -224,9 +223,10 @@ const ReviewPage: React.FC = () => {
               </div>
 
               <div className={styles.inputGroup}>
-                <label className={styles.label}>Prato *</label>
+                <label htmlFor="prato" className={`${styles.label} label`}>Prato *</label>
                 <select
-                  className={styles.select}
+                  id="prato"
+                  className={`${styles.select} select`}
                   value={selectedPrato}
                   onChange={(e) => setSelectedPrato(e.target.value)}
                   required
@@ -241,10 +241,11 @@ const ReviewPage: React.FC = () => {
               </div>
 
               <div className={styles.inputGroup}>
-                <label className={styles.label}>Data da Visita *</label>
+                <label htmlFor="visitDate" className={`${styles.label} label`}>Data da Visita *</label>
                 <input
+                  id="visitDate"
                   type="date"
-                  className={styles.input}
+                  className={`${styles.input} input`}
                   value={visitDate}
                   onChange={(e) => setVisitDate(e.target.value)}
                   required
@@ -252,14 +253,16 @@ const ReviewPage: React.FC = () => {
               </div>
 
               <div className={styles.inputGroup}>
-                <label className={styles.label}>Avaliação *</label>
+                <label className={`${styles.label} label`}>Avaliação *</label>
                 <div className={styles.ratingContainer}>
                   {[1, 2, 3, 4, 5].map((star) => (
                     <button
                       key={star}
                       type="button"
-                      className={`${styles.starButton} ${star <= rating ? styles.starActive : ''}`}
+                      className={`${styles.starButton} ${star <= rating ? styles.starActive : ''} starButton ${star <= rating ? 'starActive' : ''}`}
                       onClick={() => setRating(star)}
+                      aria-label={`Avaliar com ${star} estrela${star > 1 ? 's' : ''}`}
+                      title={`Avaliar com ${star} estrela${star > 1 ? 's' : ''}`}
                     >
                       {star <= rating ? <FaStar /> : <FaRegStar />}
                     </button>
@@ -271,15 +274,16 @@ const ReviewPage: React.FC = () => {
               </div>
 
               <div className={styles.inputGroup}>
-                <label className={styles.label}>Sua Experiência</label>
+                <label htmlFor="experience" className={`${styles.label} label`}>Sua Experiência</label>
                 <textarea
-                  className={styles.textarea}
+                  id="experience"
+                  className={`${styles.textarea} textarea`}
                   rows={6}
                   placeholder="Conte-nos sobre sua experiência... O que achou do prato? Como estava o ambiente? Recomendaria?"
                   value={reviewText}
                   onChange={(e) => setReviewText(e.target.value)}
                 />
-                <span className={styles.charCount}>{reviewText.length} / 1000 caracteres</span>
+                <span className={`${styles.charCount} charCount`}>{reviewText.length} / 1000 caracteres</span>
               </div>
             </div>
 
@@ -287,16 +291,17 @@ const ReviewPage: React.FC = () => {
               <h2 className={styles.sectionTitle}>Fotos</h2>
               <div className={styles.uploadSection}>
                 <input
+                  id="uploadFiles"
                   ref={fileInputRef}
                   type="file"
                   accept="image/*"
                   multiple
                   onChange={handleImageUpload}
-                  className={styles.fileInput}
+                  className={`${styles.fileInput} fileInput`}
                 />
                 <button
                   type="button"
-                  className={styles.uploadButton}
+                  className={`${styles.uploadButton} uploadButton`}
                   onClick={() => fileInputRef.current?.click()}
                 >
                   <FiUpload />
@@ -309,11 +314,13 @@ const ReviewPage: React.FC = () => {
                 <div className={styles.imagesGrid}>
                   {uploadedImages.map((img) => (
                     <div key={img.id} className={styles.imagePreview}>
-                      <img src={img.preview} alt="Preview" />
+                      {img.preview && <img src={img.preview} alt="Preview" />}
                       <button
                         type="button"
                         className={styles.removeImageButton}
                         onClick={() => handleRemoveImage(img.id)}
+                        aria-label="Remover imagem"
+                        title="Remover imagem"
                       >
                         <FiX />
                       </button>
@@ -330,22 +337,23 @@ const ReviewPage: React.FC = () => {
             )}
             <button 
               type="submit" 
-              className={styles.submitButton}
+              className={`${styles.submitButton} submitButton`}
               disabled={isSubmitting}
             >
               {isSubmitting ? 'Publicando...' : 'Publicar Avaliação'}
             </button>
           </form>
         ) : (
-          <form onSubmit={handleSubmitList} className={styles.form}>
+          <form onSubmit={handleSubmitList} className={`${styles.form} form`}>
             <div className={styles.formSection}>
               <h2 className={styles.sectionTitle}>Informações da Lista</h2>
               
               <div className={styles.inputGroup}>
-                <label className={styles.label}>Nome da Lista *</label>
+                <label htmlFor="listName" className={`${styles.label} label`}>Nome da Lista *</label>
                 <input
+                  id="listName"
                   type="text"
-                  className={styles.input}
+                  className={`${styles.input} input`}
                   placeholder="Ex: Melhores Restaurantes de Salvador"
                   value={listName}
                   onChange={(e) => setListName(e.target.value)}
@@ -355,16 +363,17 @@ const ReviewPage: React.FC = () => {
               </div>
 
               <div className={styles.inputGroup}>
-                <label className={styles.label}>Descrição</label>
+                <label htmlFor="listDescription" className={`${styles.label} label`}>Descrição</label>
                 <textarea
-                  className={styles.textarea}
+                  id="listDescription"
+                  className={`${styles.textarea} textarea`}
                   rows={4}
                   placeholder="Descreva sua lista... O que ela representa? Por que você criou?"
                   value={listDescription}
                   onChange={(e) => setListDescription(e.target.value)}
                   maxLength={500}
                 />
-                <span className={styles.charCount}>{listDescription.length} / 500 caracteres</span>
+                <span className={`${styles.charCount} charCount`}>{listDescription.length} / 500 caracteres</span>
               </div>
 
               <div className={styles.inputGroup}>
@@ -379,7 +388,7 @@ const ReviewPage: React.FC = () => {
                   />
                   {listCoverImage ? (
                     <div className={styles.coverPreview}>
-                      <img src={listCoverImage.preview} alt="Capa" />
+                      {listCoverImage.preview && <img src={listCoverImage.preview} alt="Capa" />}
                       <button
                         type="button"
                         className={styles.changeCoverButton}
@@ -415,6 +424,8 @@ const ReviewPage: React.FC = () => {
                         type="button"
                         className={styles.removeItemButton}
                         onClick={() => handleRemoveListItem(item.id)}
+                        aria-label={`Remover ${item.name}`}
+                        title={`Remover ${item.name}`}
                       >
                         <FiTrash2 />
                       </button>
@@ -442,14 +453,16 @@ const ReviewPage: React.FC = () => {
                   />
                   <button
                     type="button"
-                    className={styles.addButton}
+                    className={`${styles.addButton} addButton`}
                     onClick={handleAddListItem}
+                    aria-label="Confirmar adição de item"
+                    title="Confirmar adição de item"
                   >
                     <FiPlus />
                   </button>
                   <button
                     type="button"
-                    className={styles.cancelButton}
+                    className={`${styles.cancelButton} cancelButton`}
                     onClick={() => {
                       setShowAddItem(false);
                       setNewItemName('');
@@ -461,7 +474,7 @@ const ReviewPage: React.FC = () => {
               ) : (
                 <button
                   type="button"
-                  className={styles.addItemButton}
+                  className={`${styles.addItemButton} addItemButton`}
                   onClick={() => setShowAddItem(true)}
                 >
                   <FiPlus />
