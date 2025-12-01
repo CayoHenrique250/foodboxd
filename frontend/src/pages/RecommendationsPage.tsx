@@ -1,8 +1,6 @@
 import React from 'react';
 import styles from './RecommendationsPage.module.css';
 
-import logoImg from '../../public/logo-backBlack-horizontal.png'; 
-
 const recommendationsData = [
   { 
     id: 1, 
@@ -41,7 +39,7 @@ const RecommendationsPage: React.FC = () => {
       
       <header className={styles.headerLogo}>
         <img 
-          src={logoImg} 
+          src="/logo-backBlack-horizontal.png" 
           alt="Food Boxd Logo" 
           className={styles.logoImage} 
         />
@@ -50,7 +48,7 @@ const RecommendationsPage: React.FC = () => {
       <div className={styles.gridContainer}>
         {recommendationsData.map((card) => (
           <div key={card.id} className={styles.card}>
-            <img src={card.image} alt={card.title} className={styles.cardImage} />
+            {card.image && <img src={card.image} alt={card.title} className={styles.cardImage} />}
             <div className={styles.cardOverlay}>
               <span className={styles.cardTitle}>{card.title}</span>
             </div>

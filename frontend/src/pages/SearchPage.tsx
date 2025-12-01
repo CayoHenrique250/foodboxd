@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './SearchPage.module.css';
-import logoImg from '../../public/logo-backBlack-horizontal.png';
 
 import { FiSearch, FiArrowRightCircle } from 'react-icons/fi'; 
 
@@ -22,7 +21,7 @@ const SearchPage: React.FC = () => {
       
       <header className={styles.headerLogo}>
         <img 
-          src={logoImg} 
+          src="/logo-backBlack-horizontal.png" 
           alt="Logo" 
           className={styles.logoImage} 
         />

@@ -105,7 +105,7 @@ export const ProfilePage = () => {
     <div className={styles.container}>
       <header className={styles.header}>
         <div className={styles.topBar}>
-          <a href="/app/configuracoes" className={styles.settingsIcon}>
+          <a href="/app/configuracoes" className={styles.settingsIcon} title="Configurações" aria-label="Configurações">
             <IconSettings />
           </a>
           <div className={styles.logoContainer}>
@@ -121,8 +121,9 @@ export const ProfilePage = () => {
           <div className={styles.photoWrapper}>
             <img
               src={
-                user.foto ||
-                `https://ui-avatars.com/api/?name=${user.name}&background=96300C&color=fff&bold=true&size=200`
+                user.foto && user.foto.trim() !== '' 
+                  ? user.foto
+                  : `https://ui-avatars.com/api/?name=${user.name}&background=96300C&color=fff&bold=true&size=200`
               }
               alt="Foto de Perfil"
               className={styles.profilePicture}

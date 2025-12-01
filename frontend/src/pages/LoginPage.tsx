@@ -101,7 +101,7 @@ export const LoginPage = () => {
       <div className={styles.card}>
         <img
           className={styles.logo}
-          src="../../public/logo-backGray-horizontal.png"
+          src="/logo-backGray-horizontal.png?url"
           alt=""
         />
         <h2 className={styles.subtitle}>Entre na sua conta</h2>

@@ -1,7 +1,6 @@
 import React, { useState, useRef, type MouseEvent } from 'react';
 import styles from './Dashboard.module.css';
 import { FiArrowRightCircle } from 'react-icons/fi'; 
-import { FloatingButtons } from '../components/FloatingButtons';
 
 const logoImg = "/logo-backBlack-horizontal.png"; 
 
@@ -57,16 +56,36 @@ const DashboardPage: React.FC = () => {
       <section className={styles.section}>
         <div className={styles.sectionHeader}>
           <h2 className={styles.sectionTitle}>Populares essa semana</h2>
-          <FiArrowRightCircle className={styles.arrowIcon} />
+          <div 
+            role="button" 
+            tabIndex={0} 
+            aria-label="Ver mais itens populares"
+            title="Ver mais itens populares"
+            className={styles.arrowIconContainer}
+          >
+            <FiArrowRightCircle className={styles.arrowIcon} />
+          </div>
         </div>
 
         <div 
           className={styles.horizontalScroll}
           ref={scrollRef1}
+          tabIndex={0}
+          role="region"
+          aria-label="Lista de itens populares, use as setas do teclado para navegar"
           onMouseDown={(e) => startDragging(e, scrollRef1)}
           onMouseLeave={stopDragging}
           onMouseUp={stopDragging}
           onMouseMove={(e) => onMouseMove(e, scrollRef1)}
+          onKeyDown={(e) => {
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+              e.preventDefault();
+              const scrollAmount = 200;
+              if (scrollRef1.current) {
+                scrollRef1.current.scrollLeft += e.key === 'ArrowRight' ? scrollAmount : -scrollAmount;
+              }
+            }
+          }}
         >
           {popularItems.map((item) => (
             <div key={item.id} className={styles.foodCard}>
@@ -85,16 +104,36 @@ const DashboardPage: React.FC = () => {
       <section className={styles.section}>
         <div className={styles.sectionHeader}>
           <h2 className={styles.sectionTitle}>Veja o que Seus Amigos estão Experimentando</h2>
-          <FiArrowRightCircle className={styles.arrowIcon} />
+          <div 
+            role="button" 
+            tabIndex={0} 
+            aria-label="Ver mais atividades de amigos"
+            title="Ver mais atividades de amigos"
+            className={styles.arrowIconContainer}
+          >
+            <FiArrowRightCircle className={styles.arrowIcon} />
+          </div>
         </div>
 
         <div 
           className={styles.horizontalScroll}
           ref={scrollRef2}
+          tabIndex={0}
+          role="region"
+          aria-label="Lista de atividades de amigos, use as setas do teclado para navegar"
           onMouseDown={(e) => startDragging(e, scrollRef2)}
           onMouseLeave={stopDragging}
           onMouseUp={stopDragging}
           onMouseMove={(e) => onMouseMove(e, scrollRef2)}
+          onKeyDown={(e) => {
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+              e.preventDefault();
+              const scrollAmount = 200;
+              if (scrollRef2.current) {
+                scrollRef2.current.scrollLeft += e.key === 'ArrowRight' ? scrollAmount : -scrollAmount;
+              }
+            }
+          }}
         >
           {friendsItems.map((item) => (
             <div key={item.id} className={styles.foodCard}>
