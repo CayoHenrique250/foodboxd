@@ -1,0 +1,2 @@
+web: gunicorn foodboxd_api.wsgi --log-file -
+
